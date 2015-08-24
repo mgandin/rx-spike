@@ -51,7 +51,8 @@ public class Orchestrator {
                 .subscribeOn(Schedulers.from(Executors.newSingleThreadExecutor()))
                 .filter(booking -> booking.getState().equals(ASSURED) || booking.getState().equals(BOOKED) || booking.getState().equals(PAYED))
                 .doOnNext(b -> b.change(api.compta(id), COMPTABILIZED))
-                .subscribe(b -> api.sendMail(b.getAccumulator()), throwable -> api.sendMail(throwable));
+                .doOnNext(b -> api.sendMail(b.getAccumulator()))
+                .subscribe(b -> api.writePdf(b.getAccumulator()) );
 
         return assured;
     }

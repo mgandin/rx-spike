@@ -38,7 +38,7 @@ public class Api {
 
     private void maybeThrowAnError(String verb) {
         Random random = new Random();
-       if (random.nextInt() % 2 == 0) {
+       if (random.nextInt() % 10 == 0) {
             throw new RuntimeException("ERROR DURING API CALL :: " + verb);
         }
     }
@@ -49,5 +49,9 @@ public class Api {
 
     public void sendMail(String message) {
         System.out.println("SEND MAIL OK : " + message);
+    }
+
+    public void writePdf(String message) {
+        System.out.println("WRITE PDF OF : " + message);
     }
 }
